@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nour Academy — Accueil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: '#0B1F3A',
+                        blue: '#2563EB',
+                        neon: '#A3FF4F',
+                        yellow: '#F5C451',
+                        light: '#F8FAFC',
+                        dark: '#080B0A'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar & animations */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F8FAFC;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0B1F3A;
+            border-radius: 4px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-dark {
+            background: rgba(8, 11, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-light text-dark overflow-x-hidden">
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed w-full top-0 z-50 glass-dark text-white transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div
+                        class="w-8 h-8 rounded-full bg-neon flex items-center justify-center text-dark font-bold text-lg">
+                        N</div>
+                    <span class="font-bold text-xl tracking-tight">Nour Academy</span>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-sm font-medium hover:text-neon transition">Accueil</a>
+                    <a href="#catalogue" class="text-sm font-medium hover:text-neon transition">Nos cours</a>
+                    <a href="#centres" class="text-sm font-medium hover:text-neon transition">Nos centres</a>
+
+                    <div class="relative">
+                        <input type="text" id="navSearch" placeholder="Rechercher..."
+                            class="bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm focus:outline-none focus:border-neon text-white placeholder-white/50 w-40 transition-all focus:w-56">
+                    </div>
+
+                    <a href="#panier" class="relative group cursor-pointer">
+                        <svg class="w-6 h-6 group-hover:text-neon transition" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                        <span id="cartCount"
+                            class="absolute -top-2 -right-2 bg-yellow text-dark text-xs font-bold px-1.5 py-0.5 rounded-full">0</span>
+                    </a>
+
+                    <a href="#inscription"
+                        class="bg-neon text-dark font-semibold px-5 py-2.5 rounded-full hover:bg-yellow transition transform hover:scale-105">S'inscrire</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <a href="#panier" class="relative">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                        <span id="cartCountMobile"
+                            class="absolute -top-2 -right-2 bg-yellow text-dark text-xs font-bold px-1.5 py-0.5 rounded-full">0</span>
+                    </a>
+                    <button class="text-white hover:text-neon focus:outline-none">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-navy overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-40">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
+                alt="Students studying" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-transparent"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:w-2/3">
+            <div
+                class="inline-block px-4 py-1.5 rounded-full border border-neon/50 text-neon text-sm font-medium mb-6 w-max backdrop-blur-sm bg-navy/30">
+                Excellence éducative à Nador</div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
+                Chaque élève peut <br><span class="text-neon">réussir son avenir.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed">
+                Des cours de soutien scolaire et de langues adaptés à chaque niveau, pour progresser avec confiance à
+                Nador.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#catalogue"
+                    class="bg-neon text-dark font-bold text-center px-8 py-4 rounded-full hover:bg-yellow transition transform hover:scale-105 shadow-[0_0_20px_rgba(163,255,79,0.3)]">Découvrir
+                    nos cours</a>
+                <a href="#centres"
+                    class="bg-white/10 text-white font-medium text-center border border-white/20 px-8 py-4 rounded-full hover:bg-white/20 transition backdrop-blur-sm">Nos
+                    centres</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Catalogue -->
+    <section id="catalogue" class="py-20 bg-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold text-navy mb-4">Trouvons le cours idéal pour votre enfant.
+                    </h2>
+                    <p class="text-gray-600 font-medium">Explorez notre sélection et réservez votre place.</p>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="filterSearch" placeholder="Rechercher un cours..."
+                        class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue shadow-sm">
+                    <select id="filterSubject"
+                        class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue shadow-sm bg-white">
+                        <option value="all">Toutes les matières</option>
+                        <option value="Mathématiques">Mathématiques</option>
+                        <option value="Physique-Chimie">Physique-Chimie</option>
+                        <option value="SVT">SVT</option>
+                        <option value="Français">Français</option>
+                        <option value="Anglais">Anglais</option>
+                        <option value="Préparation">Préparation Examens</option>
+                    </select>
+                    <select id="filterLevel"
+                        class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue shadow-sm bg-white">
+                        <option value="all">Tous les niveaux</option>
+                        <option value="2e Bac">2e Bac</option>
+                        <option value="1re Bac">1re Bac</option>
+                        <option value="Tronc commun">Tronc commun</option>
+                        <option value="3e année collège">3e année collège</option>
+                        <option value="Débutant">Débutant</option>
+                        <option value="Intermédiaire">Intermédiaire</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-6 text-sm font-semibold text-gray-500"><span id="resultsCount">12</span> résultats trouvés
+            </div>
+
+            <!-- Grid -->
+            <div id="courseGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Rendered via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart / Panier Section -->
+    <section id="panier" class="py-16 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-10 h-10 rounded-full bg-blue text-white flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-navy">Votre Panier</h2>
+            </div>
+
+            <div class="bg-light rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100">
+                <div id="cartEmptyState" class="text-center py-10 fade-in">
+                    <div
+                        class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center text-gray-400">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-gray-500 text-lg font-medium">Votre panier est vide pour le moment.</p>
+                    <p class="text-gray-400 mt-2">Sélectionnez des cours depuis le catalogue ci-dessus.</p>
+                </div>
+
+                <div id="cartContent" class="hidden fade-in">
+                    <div id="cartItems" class="space-y-4 mb-8">
+                        <!-- Items rendered via JS -->
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-6">
+                        <div class="flex justify-between items-center mb-8">
+                            <span class="text-gray-600 font-medium text-lg">Total mensuel estimé</span>
+                            <span class="text-3xl font-extrabold text-navy"><span id="cartTotal">0</span> <span
+                                    class="text-xl">MAD</span></span>
+                        </div>
+                        <button onclick="document.getElementById('inscription').scrollIntoView({behavior: 'smooth'})"
+                            class="w-full bg-blue text-white font-bold py-4 rounded-xl hover:bg-navy transition-colors text-lg flex justify-center items-center gap-2">
+                            Continuer vers l'inscription
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="inscription" class="py-20 bg-dark text-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Finaliser l'inscription</h2>
+            <p class="text-gray-400 text-center mb-10">Plus que quelques étapes pour réserver votre place.</p>
+
+            <!-- Progress Bar -->
+            <div class="flex items-center justify-between mb-10 relative">
+                <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-1 bg-white/10 z-0 rounded-full">
+                </div>
+                <div id="progressBar"
+                    class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1/2 h-1 bg-neon z-0 rounded-full transition-all duration-500">
+                </div>
+
+                <div class="relative z-10 flex flex-col items-center">
+                    <div
+                        class="w-10 h-10 rounded-full bg-neon text-dark font-bold flex items-center justify-center border-4 border-dark">
+                        1</div>
+                    <span class="text-xs font-semibold text-neon mt-2 uppercase tracking-wide">Informations</span>
+                </div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <div id="step2Indicator"
+                        class="w-10 h-10 rounded-full bg-white/20 text-white font-bold flex items-center justify-center border-4 border-dark transition-colors">
+                        2</div>
+                    <span id="step2Label"
+                        class="text-xs font-semibold text-gray-500 mt-2 uppercase tracking-wide transition-colors">Sécurité</span>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="regForm" onsubmit="event.preventDefault();"
+                class="bg-white/5 border border-white/10 p-6 md:p-10 rounded-3xl backdrop-blur-md">
+
+                <!-- Step 1 -->
+                <div id="formStep1" class="space-y-6 fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Nom complet du parent</label>
+                            <input type="text" required
+                                class="w-full bg-dark/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon focus:ring-1 focus:ring-neon placeholder-gray-600 transition"
+                                placeholder="Ex: Ahmed El Fassi">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Téléphone (Maroc)</label>
+                            <input type="tel" required
+                                class="w-full bg-dark/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon focus:ring-1 focus:ring-neon placeholder-gray-600 transition"
+                                placeholder="+212 6 XX XX XX XX">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Adresse Email</label>
+                        <input type="email" required
+                            class="w-full bg-dark/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon focus:ring-1 focus:ring-neon placeholder-gray-600 transition"
+                            placeholder="contact@exemple.com">
+                    </div>
+                    <div class="border-t border-white/10 pt-6 mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Prénom de l'élève</label>
+                            <input type="text" id="studentName" required
+                                class="w-full bg-dark/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon focus:ring-1 focus:ring-neon placeholder-gray-600 transition"
+                                placeholder="Ex: Youssef">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Niveau scolaire</label>
+                            <select required
+                                class="w-full bg-dark/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon focus:ring-1 focus:ring-neon appearance-none">
+                                <option value="" disabled selected>Sélectionner le niveau</option>
+                                <option value="3e année collège">3e année collège</option>
+                                <option value="Tronc commun">Tronc commun</option>
+                                <option value="1re Bac">1re Bac</option>
+                                <option value="2e Bac">2e Bac</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pt-6">
+                        <button type="button" onclick="nextStep()"
+                            class="w-full bg-neon text-dark font-bold py-4 rounded-xl hover:bg-yellow transition-colors text-lg">Continuer</button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div id="formStep2" class="space-y-6 hidden fade-in">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Créer un mot de passe</label>
+                        <input type="password" id="pwd" oninput="checkStrength()" required
+                            class="w-full bg-dark/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon focus:ring-1 focus:ring-neon placeholder-gray-600 transition"
+                            placeholder="••••••••">
+                        <div class="mt-2 flex items-center justify-between text-xs">
+                            <span class="text-gray-400">Force du mot de passe :</span>
+                            <span id="pwdText" class="font-bold text-gray-500">-</span>
+                        </div>
+                        <div class="mt-1 h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                            <div id="pwdBar" class="h-full w-0 bg-red-500 transition-all"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Confirmer le mot de passe</label>
+                        <input type="password" id="pwdConfirm" required
+                            class="w-full bg-dark/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon focus:ring-1 focus:ring-neon placeholder-gray-600 transition"
+                            placeholder="••••••••">
+                        <p id="pwdError" class="text-red-400 text-xs mt-2 hidden">Les mots de passe ne correspondent
+                            pas.</p>
+                    </div>
+
+                    <div class="bg-navy/40 p-4 rounded-xl border border-blue/30 mt-6">
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" id="consent" required
+                                class="mt-1 w-5 h-5 rounded border-white/20 text-neon focus:ring-neon bg-dark/50">
+                            <span class="text-sm text-gray-300 leading-relaxed">
+                                J'accepte les conditions générales et je consens au traitement de mes données
+                                personnelles conformément à la <a href="#"
+                                    class="text-blue hover:text-neon underline">politique de confidentialité</a> de Nour
+                                Academy.
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="pt-6 flex gap-4">
+                        <button type="button" onclick="prevStep()"
+                            class="w-1/3 bg-white/10 text-white font-bold py-4 rounded-xl hover:bg-white/20 transition-colors">Précédent</button>
+                        <button type="button" onclick="submitForm()"
+                            class="w-2/3 bg-neon text-dark font-bold py-4 rounded-xl hover:bg-yellow transition-colors text-lg shadow-[0_0_15px_rgba(163,255,79,0.2)]">Confirmer
+                            l'inscription</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Centres Section -->
+    <section id="centres" class="py-20 bg-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy mb-12 text-center">Nos centres à Nador</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Centre 1 -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Nador Centre"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div
+                            class="inline-block px-3 py-1 bg-blue/10 text-blue font-bold text-xs rounded-full mb-3 uppercase tracking-wider">
+                            Principal</div>
+                        <h3 class="text-2xl font-bold text-navy mb-2">Nador Centre</h3>
+                        <p class="text-gray-500 text-sm mb-4 flex items-start gap-2">
+                            <svg class="w-5 h-5 text-gray-400 mt-0.5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>[Adresse fictive au centre de Nador], Nador</span>
+                        </p>
+                        <p class="text-gray-500 text-sm flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <span>+212 6 XX XX XX XX</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Centre 2 -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Hay Al Matar"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div
+                            class="inline-block px-3 py-1 bg-yellow/20 text-yellow-700 font-bold text-xs rounded-full mb-3 uppercase tracking-wider">
+                            Nouveau</div>
+                        <h3 class="text-2xl font-bold text-navy mb-2">Hay Al Matar</h3>
+                        <p class="text-gray-500 text-sm mb-4 flex items-start gap-2">
+                            <svg class="w-5 h-5 text-gray-400 mt-0.5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>[Adresse fictive Hay Al Matar], Nador</span>
+                        </p>
+                        <p class="text-gray-500 text-sm flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <span>+212 6 XX XX XX XX</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Centre 3 -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Selouane"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div
+                            class="inline-block px-3 py-1 bg-gray-200 text-gray-600 font-bold text-xs rounded-full mb-3 uppercase tracking-wider">
+                            Campus</div>
+                        <h3 class="text-2xl font-bold text-navy mb-2">Selouane</h3>
+                        <p class="text-gray-500 text-sm mb-4 flex items-start gap-2">
+                            <svg class="w-5 h-5 text-gray-400 mt-0.5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>[Adresse fictive près de l'université], Selouane</span>
+                        </p>
+                        <p class="text-gray-500 text-sm flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <span>+212 6 XX XX XX XX</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 bg-yellow text-dark text-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-8 tracking-tight">Prêt à avancer avec confiance ?</h2>
+            <button onclick="document.getElementById('catalogue').scrollIntoView({behavior: 'smooth'})"
+                class="bg-dark text-white font-bold px-10 py-5 rounded-full hover:bg-navy transition transform hover:scale-105 text-lg shadow-xl shadow-dark/20">
+                Choisir mes cours
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white pt-16 pb-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div
+                            class="w-8 h-8 rounded-full bg-neon flex items-center justify-center text-dark font-bold text-lg">
+                            N</div>
+                        <span class="font-bold text-xl tracking-tight">Nour Academy</span>
+                    </div>
+                    <p class="text-gray-400 max-w-sm">Le réseau d'excellence pour le soutien scolaire et l'apprentissage
+                        des langues dans la province de Nador.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-neon">Liens rapides</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Accueil</a></li>
+                        <li><a href="#catalogue" class="hover:text-white transition">Nos cours</a></li>
+                        <li><a href="#centres" class="hover:text-white transition">Centres</a></li>
+                        <li><a href="#" class="hover:text-white transition">Politique de confidentialité</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-neon">Nos centres</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Nador Centre</li>
+                        <li>Hay Al Matar</li>
+                        <li>Selouane</li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+                <p>&copy; 2026 Nour Academy Nador. Tous droits réservés.</p>
+                <p class="mt-2 md:mt-0">Design respecté avec ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div id="successModal"
+        class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 md:p-10 max-w-md w-full shadow-2xl transform scale-95 opacity-0 transition-all duration-300"
+            id="modalContent">
+            <div class="w-20 h-20 bg-green-100 rounded-full mx-auto flex items-center justify-center mb-6">
+                <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-center text-navy mb-2">Inscription confirmée</h3>
+            <p class="text-center text-gray-500 mb-6">Votre demande a bien été enregistrée.</p>
+
+            <div class="bg-light rounded-2xl p-5 mb-8 border border-gray-100">
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3 mb-3">
+                    <span class="text-gray-500 text-sm">Référence</span>
+                    <span class="font-mono font-bold text-navy">NOUR-2026-X89A</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3 mb-3">
+                    <span class="text-gray-500 text-sm">Élève</span>
+                    <span class="font-semibold text-navy" id="modalStudentName">Youssef</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3 mb-3">
+                    <span class="text-gray-500 text-sm">Cours réservés</span>
+                    <span class="font-semibold text-navy" id="modalCourseCount">0</span>
+                </div>
+                <div class="flex justify-between items-center pt-1">
+                    <span class="text-gray-800 font-bold">Total Mensuel</span>
+                    <span class="font-extrabold text-blue text-lg"><span id="modalTotal">0</span> MAD</span>
+                </div>
+            </div>
+
+            <button onclick="closeModal()"
+                class="w-full bg-navy text-white font-bold py-4 rounded-xl hover:bg-blue transition-colors">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Data
+        const allCourses = [
+            { id: 1, title: "Mathématiques", subject: "Mathématiques", level: "2e Bac", price: 350, seats: 5, centre: "Nador Centre" },
+            { id: 2, title: "Physique-Chimie", subject: "Physique-Chimie", level: "2e Bac", price: 400, seats: 0, centre: "Hay Al Matar" },
+            { id: 3, title: "SVT", subject: "SVT", level: "2e Bac", price: 350, seats: 6, centre: "Nador Centre" },
+            { id: 4, title: "Mathématiques", subject: "Mathématiques", level: "1re Bac", price: 300, seats: 4, centre: "Selouane" },
+            { id: 5, title: "Physique-Chimie", subject: "Physique-Chimie", level: "1re Bac", price: 350, seats: 3, centre: "Hay Al Matar" },
+            { id: 6, title: "Français", subject: "Français", level: "Tronc commun", price: 250, seats: 8, centre: "Nador Centre" },
+            { id: 7, title: "Anglais", subject: "Anglais", level: "Débutant", price: 280, seats: 7, centre: "Selouane" },
+            { id: 8, title: "Anglais", subject: "Anglais", level: "Intermédiaire", price: 320, seats: 4, centre: "Hay Al Matar" },
+            { id: 9, title: "Français", subject: "Français", level: "3e année collège", price: 250, seats: 5, centre: "Nador Centre" },
+            { id: 10, title: "Mathématiques", subject: "Mathématiques", level: "3e année collège", price: 280, seats: 2, centre: "Selouane" },
+            { id: 11, title: "Préparation à l'examen régional", subject: "Préparation", level: "3e année collège", price: 300, seats: 6, centre: "Hay Al Matar" },
+            { id: 12, title: "Préparation au Baccalauréat", subject: "Préparation", level: "2e Bac", price: 450, seats: 3, centre: "Nador Centre" }
+        ];
+
+        let cart = [];
+
+        // DOM Elements
+        const grid = document.getElementById('courseGrid');
+        const searchInput = document.getElementById('filterSearch');
+        const subjectSelect = document.getElementById('filterSubject');
+        const levelSelect = document.getElementById('filterLevel');
+        const resultsCount = document.getElementById('resultsCount');
+
+        // Initial Render
+        renderCourses();
+
+        // Listeners for filters
+        searchInput.addEventListener('input', renderCourses);
+        subjectSelect.addEventListener('change', renderCourses);
+        levelSelect.addEventListener('change', renderCourses);
+
+        function renderCourses() {
+            const query = searchInput.value.toLowerCase();
+            const subject = subjectSelect.value;
+            const level = levelSelect.value;
+
+            const filtered = allCourses.filter(c => {
+                const matchSearch = c.title.toLowerCase().includes(query) || c.subject.toLowerCase().includes(query);
+                const matchSubject = subject === 'all' || c.subject.includes(subject);
+                const matchLevel = level === 'all' || c.level === level;
+                return matchSearch && matchSubject && matchLevel;
+            });
+
+            resultsCount.textContent = filtered.length;
+            grid.innerHTML = '';
+
+            filtered.forEach(c => {
+                const isFull = c.seats === 0;
+                const isInCart = cart.some(item => item.id === c.id);
+
+                let buttonHtml = '';
+                if (isFull) {
+                    buttonHtml = `<button disabled class="flex-1 bg-gray-100 text-gray-400 font-bold py-3 rounded-xl cursor-not-allowed">Complet</button>`;
+                } else if (isInCart) {
+                    buttonHtml = `<button disabled class="flex-1 bg-neon/50 text-dark font-bold py-3 rounded-xl cursor-not-allowed flex justify-center items-center gap-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Ajouté</button>`;
+                } else {
+                    buttonHtml = `<button onclick="addToCart(${c.id})" class="flex-1 bg-blue text-white font-bold py-3 rounded-xl hover:bg-navy transition-colors">Ajouter au panier</button>`;
+                }
+
+                const card = `
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full fade-in relative overflow-hidden">
+                        ${isFull ? '<div class="absolute top-4 right-[-35px] bg-red-500 text-white text-xs font-bold px-10 py-1 rotate-45">COMPLET</div>' : ''}
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-light text-navy text-xs font-bold px-3 py-1 rounded-full border border-gray-200">${c.subject}</span>
+                            <span class="bg-yellow/20 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full">${c.level}</span>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-navy mb-2">${c.title}</h3>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            2 séances / semaine
+                        </p>
+                        <p class="text-sm text-gray-500 mb-6 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                            ${c.centre}
+                        </p>
+                        
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-end mb-6">
+                                <div>
+                                    <span class="text-2xl font-extrabold text-navy">${c.price}</span>
+                                    <span class="text-sm text-gray-500"> MAD/mois</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="${isFull ? 'text-red-500' : 'text-green-500'} font-bold text-sm block">${c.seats} place${c.seats > 1 ? 's' : ''}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-3">
+                                <button class="w-12 h-12 flex items-center justify-center border-2 border-gray-200 rounded-xl text-gray-500 hover:border-blue hover:text-blue transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                </button>
+                                ${buttonHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', card);
+            });
+        }
+
+        function addToCart(id) {
+            const course = allCourses.find(c => c.id === id);
+            if (course && course.seats > 0 && !cart.some(item => item.id === id)) {
+                cart.push(course);
+                updateCartUI();
+                renderCourses(); // Re-render to disable button
+
+                // Visual feedback: scroll to cart slightly or show mini toast (omitted for brevity, button state handles it)
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(c => c.id !== id);
+            updateCartUI();
+            renderCourses();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').textContent = cart.length;
+            document.getElementById('cartCountMobile').textContent = cart.length;
+
+            const emptyState = document.getElementById('cartEmptyState');
+            const cartContent = document.getElementById('cartContent');
+            const cartItemsList = document.getElementById('cartItems');
+
+            if (cart.length === 0) {
+                emptyState.classList.remove('hidden');
+                cartContent.classList.add('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                cartContent.classList.remove('hidden');
+
+                cartItemsList.innerHTML = '';
+                let total = 0;
+
+                cart.forEach(item => {
+                    total += item.price;
+                    cartItemsList.insertAdjacentHTML('beforeend', `
+                        <div class="flex justify-between items-center p-4 bg-white rounded-2xl border border-gray-100 shadow-sm fade-in">
+                            <div>
+                                <h4 class="font-bold text-navy">${item.title} <span class="text-sm font-normal text-gray-500 ml-2">(${item.level})</span></h4>
+                                <p class="text-xs text-gray-400 mt-1">${item.centre}</p>
+                            </div>
+                            <div class="flex items-center gap-6">
+                                <span class="font-bold text-blue">${item.price} MAD</span>
+                                <button onclick="removeFromCart(${item.id})" class="w-8 h-8 flex items-center justify-center bg-red-50 text-red-500 rounded-full hover:bg-red-500 hover:text-white transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `);
+                });
+
+                document.getElementById('cartTotal').textContent = total;
+            }
+        }
+
+        // Form Logic
+        function nextStep() {
+            // Basic validation
+            const inputs = document.getElementById('formStep1').querySelectorAll('input[required], select[required]');
+            let valid = true;
+            inputs.forEach(i => { if (!i.value) { valid = false; i.classList.add('border-red-500'); } else { i.classList.remove('border-red-500'); } });
+
+            if (!valid) return;
+
+            document.getElementById('formStep1').classList.add('hidden');
+            document.getElementById('formStep2').classList.remove('hidden');
+
+            // Update Progress bar
+            document.getElementById('progressBar').classList.replace('w-1/2', 'w-full');
+            document.getElementById('step2Indicator').classList.replace('bg-white/20', 'bg-neon');
+            document.getElementById('step2Indicator').classList.replace('text-white', 'text-dark');
+            document.getElementById('step2Label').classList.replace('text-gray-500', 'text-neon');
+        }
+
+        function prevStep() {
+            document.getElementById('formStep2').classList.add('hidden');
+            document.getElementById('formStep1').classList.remove('hidden');
+
+            // Update Progress bar
+            document.getElementById('progressBar').classList.replace('w-full', 'w-1/2');
+            document.getElementById('step2Indicator').classList.replace('bg-neon', 'bg-white/20');
+            document.getElementById('step2Indicator').classList.replace('text-dark', 'text-white');
+            document.getElementById('step2Label').classList.replace('text-neon', 'text-gray-500');
+        }
+
+        function checkStrength() {
+            const pwd = document.getElementById('pwd').value;
+            const bar = document.getElementById('pwdBar');
+            const txt = document.getElementById('pwdText');
+
+            if (pwd.length === 0) {
+                bar.style.width = '0%'; txt.textContent = '-';
+            } else if (pwd.length < 6) {
+                bar.style.width = '33%'; bar.className = 'h-full bg-red-500 transition-all'; txt.textContent = 'Faible'; txt.className = 'font-bold text-red-400';
+            } else if (pwd.length < 10 && !/\d/.test(pwd)) {
+                bar.style.width = '66%'; bar.className = 'h-full bg-yellow-500 transition-all'; txt.textContent = 'Moyen'; txt.className = 'font-bold text-yellow-400';
+            } else {
+                bar.style.width = '100%'; bar.className = 'h-full bg-neon transition-all'; txt.textContent = 'Fort'; txt.className = 'font-bold text-neon';
+            }
+        }
+
+        function submitForm() {
+            if (cart.length === 0) {
+                alert("Votre panier est vide. Veuillez choisir au moins un cours.");
+                document.getElementById('catalogue').scrollIntoView();
+                return;
+            }
+
+            const pwd = document.getElementById('pwd').value;
+            const confirm = document.getElementById('pwdConfirm').value;
+            const consent = document.getElementById('consent').checked;
+
+            if (pwd !== confirm) {
+                document.getElementById('pwdError').classList.remove('hidden');
+                return;
+            }
+            if (!consent) {
+                alert("Vous devez accepter les conditions pour continuer.");
+                return;
+            }
+
+            // Simulate Success
+            const studentName = document.getElementById('studentName').value || 'Élève';
+            document.getElementById('modalStudentName').textContent = studentName;
+            document.getElementById('modalCourseCount').textContent = cart.length;
+            document.getElementById('modalTotal').textContent = cart.reduce((sum, item) => sum + item.price, 0);
+
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+
+            modal.classList.remove('hidden');
+            // Trigger animation
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                // Reset form and cart for demo loop
+                cart = [];
+                updateCartUI();
+                renderCourses();
+                document.getElementById('regForm').reset();
+                prevStep();
+                window.scrollTo(0, 0);
+            }, 300);
+        }
+    </script>
+</body>
+
+</html>
