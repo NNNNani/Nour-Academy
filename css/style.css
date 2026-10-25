@@ -236,7 +236,7 @@ select:focus-visible {
     position: absolute;
     z-index: -2;
     inset: 0;
-    background: linear-gradient(105deg, rgba(11, 31, 58, .98) 4%, rgba(11, 31, 58, .9) 52%, rgba(11, 31, 58, .45)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=2000&q=80') center/cover
+    background: linear-gradient(105deg, rgba(11, 31, 58, .98) 4%, rgba(11, 31, 58, .9) 52%, rgba(11, 31, 58, .45)), url('/data/imag/photo-1523240795612-9a054b0db644.avif') center/cover
 }
 
 .hero:after {
