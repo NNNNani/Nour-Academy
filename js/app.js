@@ -12,8 +12,7 @@ const panierCount = document.getElementById("cartCount");
 // 1. Charger les cours
 fetch("./data/data.json")
     .then(response => response.json())
-    .then(data => {
-        cours = data;
+    .then(data => { cours = data 
         afficher();
     });
 
@@ -117,20 +116,6 @@ function supprimerDuPanier(id) {
 recherche.addEventListener("input", afficher);
 categorie.addEventListener("change", afficher);
 
-
-// Bouton pour continuer vers l'inscription
-// let boutonInscription = document.getElementById("continueRegistration");
-
-// boutonInscription.addEventListener("click", function() {
-//     let panierContent = document.getElementById("cartContent");
-
-//     // Vérifier si le panier contient un cours
-//     if (panierContent.hidden === false) {
-//         document.getElementById("inscription").scrollIntoView({
-//             behavior: "smooth"
-//         });
-//     }
-// });
 
 let boutonInscription = document.getElementById("continueRegistration");
 

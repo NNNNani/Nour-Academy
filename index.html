@@ -88,50 +88,78 @@
                 <div class="stepper">
                 </div>
                 <form id="regForm" novalidate>
-                    <div id="formStep1" class="form-step">
-                        <div class="form-grid"><label>Nom complet du parent<input id="parentName" name="parentName"
-                                    autocomplete="name" required placeholder=><small class="field-error"
-                                    id="parentNameError"></small></label><label>Email du
-                                parent<input id="parentEmail" name="parentEmail" type="email" autocomplete="email"
-                                    required placeholder=><small class="field-error"
-                                    id="parentEmailError"></small></label><label>Téléphone (Maroc)<input
-                                    id="parentPhone" name="parentPhone" type="tel" autocomplete="tel" required
-                                    placeholder=><small class="field-error"
-                                    id="parentPhoneError"></small></label><label>Prénom de l'élève<input
-                                    id="studentName" name="studentName" required placeholder=><small class="field-error"
-                                    id="studentNameError"></small></label><label class="full-field">Niveau
-                                scolaire<select id="studentLevel" name="studentLevel" required>
-                                    <option value="">Choisir le niveau</option>
-                                    <option>3e année collège</option>
-                                    <option>Tronc commun</option>
-                                    <option>1re Bac</option>
-                                    <option>2e Bac</option>
-                                    <option>Débutant</option>
-                                    <option>Intermédiaire</option>
-                                </select><small class="field-error" id="studentLevelError"></small></label></div><button
-                            type="button" id="nextStep" class="button button-neon button-full">Continuer</button>
+                    <div class="form-grid">
+                        <!-- معلومات الأب والتلميذ -->
+                        <label>Nom complet du parent
+                            <input id="parentName" name="parentName" autocomplete="name" required placeholder="">
+                            <small class="field-error" id="parentNameError"></small>
+                        </label>
+
+                        <label>Email du parent
+                            <input id="parentEmail" name="parentEmail" type="email" autocomplete="email" required
+                                placeholder="">
+                            <small class="field-error" id="parentEmailError"></small>
+                        </label>
+
+                        <label>Téléphone (Maroc)
+                            <input id="parentPhone" name="parentPhone" type="tel" autocomplete="tel" required
+                                placeholder="">
+                            <small class="field-error" id="parentPhoneError"></small>
+                        </label>
+
+                        <label>Prénom de l'élève
+                            <input id="studentName" name="studentName" required placeholder="">
+                            <small class="field-error" id="studentNameError"></small>
+                        </label>
+
+                        <label class="full-field">Niveau scolaire
+                            <select id="studentLevel" name="studentLevel" required>
+                                <option value="">Choisir le niveau</option>
+                                <option>3e année collège</option>
+                                <option>Tronc commun</option>
+                                <option>1re Bac</option>
+                                <option>2e Bac</option>
+                                <option>Débutant</option>
+                                <option>Intermédiaire</option>
+                            </select>
+                            <small class="field-error" id="studentLevelError"></small>
+                        </label>
+
+                        <!-- كلمة السر -->
+                        <label>Créer un mot de passe
+                            <input id="pwd" name="password" type="password" autocomplete="new-password" required
+                                placeholder="8 caractères minimum">
+                            <small class="field-hint">Au moins 8 caractères, une majuscule, un chiffre et un caractère
+                                spécial.</small>
+                            <div class="strength-row">
+                                <span>Force du mot de passe</span>
+                                <strong id="pwdText">À saisir</strong>
+                            </div>
+                            <div class="strength-track"><span id="pwdBar"></span></div>
+                            <small class="field-error" id="pwdError"></small>
+                        </label>
+
+                        <label>Confirmer le mot de passe
+                            <input id="pwdConfirm" name="passwordConfirm" type="password" autocomplete="new-password"
+                                required placeholder="Répéter le mot de passe">
+                            <small class="field-error" id="pwdConfirmError"></small>
+                        </label>
                     </div>
-                    <div id="formStep2" class="form-step" hidden>
-                        <div class="form-grid"><label>Créer un mot de passe<input id="pwd" name="password"
-                                    type="password" autocomplete="new-password" required
-                                    placeholder="8 caractères minimum"><small class="field-hint">Au moins 8 caractères,
-                                    une majuscule, un chiffre et un caractère spécial.</small>
-                                <div class="strength-row"><span>Force du mot de passe</span><strong id="pwdText">À
-                                        saisir</strong></div>
-                                <div class="strength-track"><span id="pwdBar"></span></div><small class="field-error"
-                                    id="pwdError"></small>
-                            </label><label>Confirmer le mot de passe<input id="pwdConfirm" name="passwordConfirm"
-                                    type="password" autocomplete="new-password" required
-                                    placeholder="Répéter le mot de passe"><small class="field-error"
-                                    id="pwdConfirmError"></small></label></div><label class="consent-row"><input
-                                id="consent" type="checkbox" required><span>J'accepte les conditions et le traitement de
-                                mes données pour cette demande, conformément à la politique de confidentialité de Nour
-                                Academy.</span></label><small class="field-error" id="consentError"></small>
-                        <p class="privacy-note">Démo pédagogique : les informations ne sont pas envoyées à un serveur.
-                            N'utilisez pas de vraies données personnelles.</p>
-                        <div class="form-actions"><button type="button" id="prevStep" class="button button-muted">←
-                                Précédent</button><button type="submit" id="submitForm"
-                                class="button button-neon">Confirmer l'inscription</button></div>
+
+                    <!-- الموافقة والزر المباشر -->
+                    <label class="consent-row">
+                        <input id="consent" type="checkbox" required>
+                        <span>J'accepte les conditions et le traitement de mes données pour cette demande, conformément
+                            à la politique de confidentialité de Nour Academy.</span>
+                    </label>
+                    <small class="field-error" id="consentError"></small>
+
+                    <p class="privacy-note">Démo pédagogique : les informations ne sont pas envoyées à un serveur.
+                        N'utilisez pas de vraies données personnelles.</p>
+
+                    <div class="form-actions">
+                        <button type="submit" id="submitForm" class="button button-neon button-full">Confirmer
+                            l'inscription</button>
                     </div>
                 </form>
             </div>
