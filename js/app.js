@@ -44,6 +44,9 @@ function afficher() {
             continue;
         }
 
+
+
+
         liste.innerHTML += `
             <div class="course-card">
                 <h2>${c.title}</h2>
@@ -54,7 +57,7 @@ function afficher() {
                 <button
                     type="button"
                     onclick="ajouterAuPanier(${c.id})"
-                    ${c.seats <= 0 ? "disabled" : ""}
+                    ${c.seats <= 0 ? "disabled" :  ""}
                 >
                     ${c.seats <= 0 ? "Complet" : "Ajouter au panier"}
                 </button>
@@ -69,11 +72,11 @@ function ajouterAuPanier(id) {
 
     if (!c || c.seats <= 0) return;
 
-    let existe = panier.find(item => item.id === id);
+    let existe = panier.find(item  => item.id === id);
 
     if (existe) return;
 
-    panier.push(c);
+    panier.push(c)
 
     afficherPanier();
 }
