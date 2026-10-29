@@ -1,3 +1,4 @@
+
 let cours = [];
 let panier = [];
 
@@ -6,28 +7,36 @@ const recherche = document.getElementById("filterSearch");
 const categorie = document.getElementById("filterSubject");
 
 const panierItems = document.getElementById("cartItems");
+const panierItemss = document.getElementsByClassName("cartItems");
 const panierTotal = document.getElementById("cartTotal");
 const panierCount = document.getElementById("cartCount");
 
-// 1. Charger les cours
+//  Charger les cours
+// fetch("./data/data.json")
 fetch("./data/data.json")
     .then(response => response.json())
+    .then(response => response.json())
     .then(data => {
+
         cours = data
         afficher();
     });
 
-// 2. Afficher les cours
+//  Afficher les cours
 function afficher() {
+
+    liste.innerHTML = "";
     liste.innerHTML = "";
 
-    let texte = recherche.value.toLowerCase();
+    let texte = recherche.value.toLowerCase()
     let cat = categorie.value;
 
+    // for (let i = cours ) {
     for (let i = 0; i < cours.length; i++) {
-        let c = cours[i];
+        let c = cours [i];
 
-        if (!c.title.toLowerCase().includes(texte)) {
+        // if (!c.title.toLowerCase().includes(texte)) {
+        if ( !c.title.toLowerCase().includes(texte)) {
             continue;
         }
 
@@ -54,7 +63,7 @@ function afficher() {
     }
 }
 
-// 3. Ajouter un cours au panier
+//  Ajouter un cours au panier
 function ajouterAuPanier(id) {
     let c = cours.find(c => c.id === id);
 
@@ -69,7 +78,7 @@ function ajouterAuPanier(id) {
     afficherPanier();
 }
 
-// 4. Afficher le panier
+//  Afficher le panier
 function afficherPanier() {
     panierItems.innerHTML = "";
 
@@ -105,7 +114,7 @@ function afficherPanier() {
         panier.length === 0;
 }
 
-// 5. Supprimer un cours
+//  Supprimer un cours
 function supprimerDuPanier(id) {
     panier = panier.filter(c => c.id !== id);
 
@@ -113,7 +122,7 @@ function supprimerDuPanier(id) {
     afficher();
 }
 
-// 6. Recherche et catégorie
+//  Recherche et catégorie
 recherche.addEventListener("input", afficher);
 categorie.addEventListener("change", afficher);
 
@@ -234,7 +243,7 @@ formulaire.addEventListener("submit", function (event) {
 
     motDePasse.addEventListener("input", function () {
         const valeur = motDePasse.value;
-        let         score = 0;
+        let score = 0;
 
         if (valeur.length >= 8) score++;
         if (/[A-Z]/.test(valeur)) score++;
@@ -257,8 +266,8 @@ formulaire.addEventListener("submit", function (event) {
         barreForce.style.width = (score * 20) + "%";
         barreForce.style.background =
             score <= 2 ? "#ef4444" :
-            score === 3 ? "#f59e0b" :
-            score === 4 ? "#3b82f6" : "#22c55e";
+                score === 3 ? "#f59e0b" :
+                    score === 4 ? "#3b82f6" : "#22c55e";
     });
 
 });
