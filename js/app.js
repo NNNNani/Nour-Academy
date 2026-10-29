@@ -54,6 +54,8 @@ function afficher() {
     }
 }
 
+
+
 // 3. Ajouter un cours au panier
 function ajouterAuPanier(id) {
     let c = cours.find(c => c.id === id);
