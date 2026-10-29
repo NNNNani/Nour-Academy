@@ -161,7 +161,7 @@ formulaire.addEventListener("submit", function (event) {
     }
 
     // Vérifier l'email
-    const emailValide = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailValide = /^[^\s@]+\.[^\s@]+$/;
 
     if (!emailValide.test(email)) {
         document.getElementById("parentEmailError").textContent =
@@ -196,7 +196,7 @@ formulaire.addEventListener("submit", function (event) {
 
     // Vérifier le mot de passe
     const motDePasseValide =
-        /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+        /^(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
 
     if (!motDePasseValide.test(motDePasse)) {
         document.getElementById("pwdError").textContent =
