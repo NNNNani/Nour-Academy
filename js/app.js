@@ -12,7 +12,8 @@ const panierCount = document.getElementById("cartCount");
 // 1. Charger les cours
 fetch("./data/data.json")
     .then(response => response.json())
-    .then(data => { cours = data 
+    .then(data => {
+        cours = data
         afficher();
     });
 
@@ -119,28 +120,145 @@ categorie.addEventListener("change", afficher);
 
 let boutonInscription = document.getElementById("continueRegistration");
 
-boutonInscription.addEventListener("click", function() {
+boutonInscription.addEventListener("click", function () {
     document.getElementById("inscription").scrollIntoView({
         behavior: "smooth"
     });
 });
 
-let boutonContinuer = document.getElementById("nextStep");
-let etape1 = document.getElementById("formStep1");
-let etape2 = document.getElementById("formStep2");
 
-boutonContinuer.addEventListener("click", function() {
-    let nom = document.getElementById("parentName").value.trim();
-    let email = document.getElementById("parentEmail").value.trim();
-    let telephone = document.getElementById("parentPhone").value.trim();
-    let eleve = document.getElementById("studentName").value.trim();
-    let niveau = document.getElementById("studentLevel").value;
+const formulaire = document.getElementById("regForm");
 
-    if (nom === "" || email === "" || telephone === "" ||
-        eleve === "" || niveau === "") {
-        alert("Remplissez tous les champs !");
-    } else {
-        etape1.hidden = true;
-        etape2.hidden = false;
+formulaire.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    // Récupérer les valeurs
+    const nom = document.getElementById("parentName").value.trim();
+    const email = document.getElementById("parentEmail").value.trim();
+    const telephone = document.getElementById("parentPhone").value.trim();
+    const eleve = document.getElementById("studentName").value.trim();
+    const niveau = document.getElementById("studentLevel").value;
+    const motDePasse = document.getElementById("pwd").value;
+    const confirmation = document.getElementById("pwdConfirm").value;
+    const consentement = document.getElementById("consent").checked;
+
+    // Réinitialiser les erreurs
+    document.querySelectorAll(".field-error").forEach(function (erreur) {
+        erreur.textContent = "";
+    });
+
+    let valide = true;
+
+    // Vérifier le nom du parent
+    if (nom.length < 2) {
+        document.getElementById("parentNameError").textContent =
+            "Entrez un nom valide.";
+        valide = false;
     }
+
+    // Vérifier l'email
+    const emailValide = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailValide.test(email)) {
+        document.getElementById("parentEmailError").textContent =
+            "Entrez une adresse email valide.";
+        valide = false;
+    }
+
+    // Vérifier le téléphone marocain
+    const tel = telephone.replace(/[\s.-]/g, "");
+
+    const telephoneValide = /^(0[5-7]\d{8}|\+212[5-7]\d{8})$/;
+
+    if (!telephoneValide.test(tel)) {
+        document.getElementById("parentPhoneError").textContent =
+            "Entrez un numéro marocain valide.";
+        valide = false;
+    }
+
+    // Vérifier le nom de l'élève
+    if (eleve.length < 2) {
+        document.getElementById("studentNameError").textContent =
+            "Entrez le prénom de l'élève.";
+        valide = false;
+    }
+
+    // Vérifier le niveau
+    if (niveau === "") {
+        document.getElementById("studentLevelError").textContent =
+            "Choisissez un niveau scolaire.";
+        valide = false;
+    }
+
+    // Vérifier le mot de passe
+    const motDePasseValide =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+    if (!motDePasseValide.test(motDePasse)) {
+        document.getElementById("pwdError").textContent =
+            "8 caractères minimum, une majuscule, un chiffre et un caractère spécial.";
+        valide = false;
+    }
+
+    // Vérifier la confirmation du mot de passe
+    if (confirmation !== motDePasse || confirmation === "") {
+        document.getElementById("pwdConfirmError").textContent =
+            "Les mots de passe ne correspondent pas.";
+        valide = false;
+    }
+
+    // Vérifier le consentement
+    if (!consentement) {
+        document.getElementById("consentError").textContent =
+            "Vous devez accepter les conditions.";
+        valide = false;
+    }
+
+    // Si toutes les informations sont valides
+    if (valide) {
+        alert(
+            "Demande d'inscription validée !\n\n" +
+            "Parent : " + nom + "\n" +
+            "Élève : " + eleve + "\n" +
+            "Niveau : " + niveau + "\n\n" +
+            "Ceci est une démonstration : aucune donnée n'a été envoyée."
+        );
+
+        formulaire.reset();
+    }
+
+
+    const champMotDePasse = document.getElementById("pwd");
+    const texteForce = document.getElementById("pwdText");
+    const barreForce = document.getElementById("pwdBar");
+
+    motDePasse.addEventListener("input", function () {
+        const valeur = motDePasse.value;
+        let         score = 0;
+
+        if (valeur.length >= 8) score++;
+        if (/[A-Z]/.test(valeur)) score++;
+        if (/[a-z]/.test(valeur)) score++;
+        if (/[0-9]/.test(valeur)) score++;
+        if (/[^A-Za-z0-9]/.test(valeur)) score++;
+
+        if (valeur.length === 0) {
+            texteForce.textContent = "À saisir";
+        } else if (score <= 2) {
+            texteForce.textContent = "Faible";
+        } else if (score <= 3) {
+            texteForce.textContent = "Moyen";
+        } else if (score === 4) {
+            texteForce.textContent = "Bon";
+        } else {
+            texteForce.textContent = "Fort";
+        }
+
+        barreForce.style.width = (score * 20) + "%";
+        barreForce.style.background =
+            score <= 2 ? "#ef4444" :
+            score === 3 ? "#f59e0b" :
+            score === 4 ? "#3b82f6" : "#22c55e";
+    });
+
 });
